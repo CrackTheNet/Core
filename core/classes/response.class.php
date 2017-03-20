@@ -31,8 +31,12 @@
 			}
 		}
 		
+		public function getURL($path) {
+			return sprintf('%s://%s%s', ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 'https' : 'http'), $_SERVER['HTTP_HOST'], $path);
+		}
+		
 		public function redirect($url) {
-			$this->addHeader('Location', SITE_URL . $url);
+			$this->addHeader('Location', $this->getURL($url));
 			$this->header();
 			exit();
 		}
