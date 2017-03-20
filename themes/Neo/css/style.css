@@ -1,0 +1,215 @@
+html {
+	font-size: 1em;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-ms-overflow-style: scrollbar;
+	-webkit-tap-highlight-color: transparent;
+}
+
+*, *:before, *:after {
+	-webkit-box-sizing: inherit;
+	-moz-box-sizing: inherit;
+	box-sizing: inherit;
+}
+
+html, body, .container-table {
+	height: 100%;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #FFFFFF;
+}
+
+ctn-map, canvas#particles {
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: -1;
+}
+
+canvas#particles {
+	position: absolute;
+	z-index: 1;
+}
+
+header {
+	min-height: 100px;
+}
+
+.navbar-transparent {
+	background-color: transparent;
+	border-color: transparent;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.navbar-transparent ul.nav li a {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.navbar-transparent ul.nav li a:hover {
+	color: #FFFFFF;
+	background-color: inherit;
+}
+
+.navbar-transparent ul.nav li.active a, .navbar-transparent ul.nav li.active a:focus, .navbar-transparent ul.nav li.active a:hover {
+	color: #FFFFFF;
+	background-color: inherit;
+}
+
+.container-table {
+    display: table;
+	margin-top: -100px;
+}
+
+.vertical-center-row {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.section-title {
+	line-height: 1.333333333333333;
+	margin-bottom: 3rem;
+	font-size: 2.25rem;
+	font-weight: 300;
+}
+
+.section-title + .text-lead {
+	line-height: 1.625;
+	margin-top: -1.5rem;
+	margin-bottom: 3rem;
+	font-size: 1rem;
+	font-weight: 300;
+}
+
+h2.section-title {
+	line-height: 1.375;
+	font-size: 2rem;
+}
+
+h1 {
+	font-size: 24px;
+	border-left: 3px solid #1479C5;
+    padding-left: 10px;
+}
+
+h2 {
+	font-size: 20px;
+	font-weight: normal;
+}
+
+p {
+    color: #808080;
+    font-size: 12px;
+	line-height: 1.9;	
+}
+
+.panel {
+	border: none;
+	border-radius: inherit;
+}
+
+.panel-heading {
+	color: #FFFFFF;
+    background-color: #1479C5;
+    border-color: rgba(255, 255, 255, 0.12);
+	border-radius: inherit;
+}
+
+.panel-body {
+	color: #212121;
+}
+
+.panel-body svg {
+	width: 100%;
+}
+
+.panel-body svg path.clickable {
+	cursor: pointer;
+}
+
+.panel-body .form-group {
+	margin-bottom: 5px;	
+}
+
+.panel-body .form-control {
+	-webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    -webkit-transition-property: none;
+    -o-transition-property: none;
+    transition-property: none;
+    height: 2.5rem;
+    padding: 0.4375rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.714285714285714;
+    background-color: #f8f9fb;
+    color: #212121;
+    border-width: 0.0625rem;
+    border-color: rgba(0, 0, 0, 0.12);
+    -webkit-border-radius: 0.125rem;
+    border-radius: 0.125rem;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+	
+	-webkit-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	-webkit-transition-property: background-size;
+	-o-transition-property: background-size;
+	transition-property: background-size;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#3f51b5), to(#3f51b5)), -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.12)), to(rgba(0, 0, 0, 0.12)));
+	background-image: -webkit-linear-gradient(#3f51b5, #3f51b5), -webkit-linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.12));
+	background-image: -o-linear-gradient(#3f51b5, #3f51b5), -o-linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.12));
+	background-image: linear-gradient(#3f51b5, #3f51b5), linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.12));
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center bottom, center -webkit-calc(100% - 0.0625rem);
+	background-position: center bottom, center calc(100% - 0.0625rem);
+	background-size: 0 0.125rem, 100% 0.0625rem;
+	border-color: transparent;
+	-webkit-border-radius: 0;
+	outline: none;
+	border-radius: 0;
+	padding: 0;
+}
+
+ul.square {
+	padding: 0;
+	margin: 0 0 0 30px;
+	list-style-type: square;
+}
+
+ul.square li {
+	color: #1479C5;
+    font-size: 12px;
+}
+
+ul.square li strong {
+	display: inline-block;
+	min-width: 50px;
+}
+
+ul.square li span {
+	color: #808080;	
+}
+
+.bg-box {
+	padding: 10px;
+	margin: 0 0 20px 0;
+}
+
+.bg-box.bg-danger ul.square li {
+	color: #800000;
+}
+
+.bg-box.bg-danger ul.square li span {
+	color: #a94442;
+}
