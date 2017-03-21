@@ -2,6 +2,7 @@
 	namespace CTN;
 	
 	use \CTN\Database;
+	use \CTN\Auth;
 	
 	class Core {
 		private $router;
@@ -55,10 +56,34 @@
 			});
 			
 			$this->getRouter()->addRoute('/login', function() {
-				$this->getTemplate()->display('home');
+				if(Auth::isLoggedIn()) {
+					Response::redirect('/overview');
+				}
+				
+				$errors = [];
+				
+				if(isset($_POST['action']) && $_POST['action'] == 'login') {
+					try {
+						if(Auth::login($_POST['username'], $_POST['password'])) {
+							Response::redirect('/overview');
+						} else {
+							$errors[] = 'Login war fehlerhaft!';
+						}
+					} catch(\Exception $e) {
+						$errors[] = $e->getMessage();
+					}
+				}
+				
+				$this->getTemplate()->display('home', [
+					'errors'	=> $errors
+				]);
 			});
 			
 			$this->getRouter()->addRoute('^/activate/([a-zA-Z0-9\-]+)$', function($token) {
+				if(Auth::isLoggedIn()) {
+					Response::redirect('/overview');
+				}
+				
 				// Check $token
 				
 				$this->getTemplate()->display('home', [
@@ -67,6 +92,10 @@
 			});
 			
 			$this->getRouter()->addRoute('/register', function() {
+				if(Auth::isLoggedIn()) {
+					Response::redirect('/overview');
+				}
+				
 				$errors	= [];
 				$step	= Utils::getPost('step', 1);
 				
@@ -170,6 +199,22 @@
 			
 			$this->getRouter()->addRoute('/imprint', function() {
 				$this->getTemplate()->display('imprint');
+			});
+						
+			$this->getRouter()->addRoute('/logout', function() {
+				if(Auth::isLoggedIn()) {
+					Auth::logout();
+				}
+				
+				Response::redirect('/login');
+			});
+			
+			$this->getRouter()->addRoute('/overview', function() {
+				if(!Auth::isLoggedIn()) {
+					Response::redirect('/login');
+				}
+				
+				$this->getTemplate()->display('overview');
 			});
 			
 			$this->router->run();

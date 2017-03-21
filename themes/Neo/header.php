@@ -1,3 +1,6 @@
+<?php
+	use \CTN\Auth;
+?>
 <!DOCTYPE html>
 <html lang="<?php print $template->getLanguage(true); ?>">
 	<head>
@@ -31,8 +34,14 @@
 					</div>
 					<div class="collapse navbar-collapse" id="navbar-collapse">
 						<ul class="nav navbar-nav navbar-right">
-							<li class="active"><a href="<?php print $template->getURL('/login'); ?>">Login</a></li>
-							<li><a href="<?php print $template->getURL('/register'); ?>">Registrieren</a></li>
+							<?php
+								if(!Auth::isLoggedIn()) {
+									?>
+										<li class="active"><a href="<?php print $template->getURL('/login'); ?>">Login</a></li>
+										<li><a href="<?php print $template->getURL('/register'); ?>">Registrieren</a></li>
+									<?php
+								}
+							?>
 							<li><a href="<?php print $template->getURL('/rules'); ?>">Regeln</a></li>
 							<li><a href="<?php print $template->getURL('/help'); ?>">Hilfe</a></li>
 							<li><a href="<?php print $template->getURL('/imprint'); ?>">Impressum</a></li>
