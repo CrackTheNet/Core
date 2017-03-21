@@ -19,12 +19,20 @@
 					<div class="panel-body">
 						<form method="post" action="<?php print $template->getURL('/login'); ?>">
 							<?php
-								if(isset($activated) && $activated) {
-									?>
-									<div class="bg-box bg-info text-info">
-										Dein Account wurde erfolgreich aktiviert.
-									</div>
-									<?php
+								if(isset($activated)) {
+									if($activated) {
+										?>
+											<div class="bg-box bg-info text-info">
+												Dein Account wurde erfolgreich aktiviert.
+											</div>
+										<?php
+									} else {
+										?>
+											<div class="bg-box bg-danger text-danger">
+												Aktivierungslink ist abgelaufen. <a href="#">E-Mail erneut senden</a>
+											</div>
+										<?php
+									}
 								}
 								
 								if(!empty($errors)) {
