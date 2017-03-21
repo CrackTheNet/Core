@@ -2,7 +2,7 @@
 	namespace CTN;
 	
 	class Route {
-		private $path			= '/';
+		private $path		= '/';
 		private $callback	= NULL;
 		
 		public function getPath() {

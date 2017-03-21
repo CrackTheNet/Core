@@ -1,16 +1,11 @@
 <?php
-	use \CTN\Database;
-	use \CTN\Options;
 	$template->getHeader();
-
-	$rules = Database::fetch('SELECT * FROM `' . DATABASE_PREFIX . 'rules`');
-	$count = count($rules);
 ?>
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-6">
-				<h1>Regeln</h1>
-				<p><?php print Options::get('RULES_TEXT'); ?></p>
+				<h1><?php print $title; ?></h1>
+				<p><?php print $description; ?></p>
 				<?php
 					for($index = 0; $index < $count / 2; $index++) {
 						$rule = $rules[$index];

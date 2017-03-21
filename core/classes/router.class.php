@@ -50,8 +50,8 @@
 		}
 		
 		public function run() {
-			$uri		= explode('/',	$_SERVER['REQUEST_URI']);
-			$name	= explode('/',	$_SERVER['SCRIPT_NAME']);
+			$uri	= explode('/', $_SERVER['REQUEST_URI']);
+			$name	= explode('/', $_SERVER['SCRIPT_NAME']);
 			
 			for($i = 0; $i < sizeof($name); $i++) {
 				if($uri[$i] == $name[$i]) {
@@ -60,7 +60,7 @@
 			}
 			
 			$command	= array_values($uri);
-			$route			= '';
+			$route		= '';
 			
 			foreach($command AS $index => $directory) {
 				$route .= '/' . $directory;
