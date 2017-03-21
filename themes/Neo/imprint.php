@@ -1,4 +1,6 @@
 <?php
+	use \CTN\Options;
+	
 	$template->getHeader();
 ?>
 	<div class="container">
@@ -7,14 +9,14 @@
 				<h1>Impressum</h1>
 				<p>Crack the Net | Das Browsergame</p>
 				<ul class="square">
-					<li><span>Adrian Preuß</span></li>
-					<li><span>Winzerweg 31</span></li>
-					<li><span>44263 Dortmund</span></li>
+					<li><span><?php print Options::get('IMPRINT_NAME'); ?></span></li>
+					<li><span><?php print Options::get('IMPRINT_ADDRESS'); ?></span></li>
+					<li><span><?php print Options::get('IMPRINT_CITY'); ?></span></li>
 				</ul>
 				<br />
 				<ul class="square">
-					<li><strong>E-Mail</strong> <span>info@crack-the-net.com</span></li>
-					<li><strong>Telefon</strong> <span>Auf Anfrage</span></li>
+					<li><strong>E-Mail</strong> <span><?php print Options::get('IMPRINT_EMAIL'); ?></span></li>
+					<li><strong>Telefon</strong> <span><?php print Options::get('IMPRINT_TELEPHONE'); ?></span></li>
 				</ul>
 				
 				<h1>Haftungsausschluss</h1>
