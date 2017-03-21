@@ -1,5 +1,6 @@
 <?php
 	use \CTN\Database;
+	use \CTN\Options;
 	$template->getHeader();
 
 	$rules = Database::fetch('SELECT * FROM `' . DATABASE_PREFIX . 'rules`');
@@ -9,7 +10,7 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<h1>Regeln</h1>
-				<p>Jeder User, der sich für das Spiel registriert, verpflichtet sich, diese Regeln einzuhalten und Regelverstöße anderer zu melden.</p>
+				<p><?php print Options::get('RULES_TEXT'); ?></p>
 				<?php
 					for($index = 0; $index < $count / 2; $index++) {
 						$rule = $rules[$index];
