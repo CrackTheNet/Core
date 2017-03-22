@@ -33,6 +33,9 @@
 
     # Redirect Trailing Slashes
     RewriteRule ^(.*)/$ /$1 [L,R=301]
+	
+	# Default Core data
+    RewriteRule ^(assets)/(.*)$ core/default/$1/$2 [QSA,L]
 
     # Handle Front Controller
     RewriteCond %{REQUEST_FILENAME} !-d
