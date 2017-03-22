@@ -1,5 +1,5 @@
 /*
-	Date: 2017-03-21 07:37:26
+	Date: 2017-03-22 08:59:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -153,6 +153,28 @@ INSERT INTO `ctn_countries` VALUES ('49', '3', 'atlantis', 'Atlantis', '235', nu
 INSERT INTO `ctn_countries` VALUES ('50', '3', 'myth', 'Myth', '222', null, null);
 
 -- ----------------------------
+-- Table structure for ctn_options
+-- ----------------------------
+DROP TABLE IF EXISTS `ctn_options`;
+CREATE TABLE `ctn_options` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `key` varchar(255) DEFAULT NULL,
+  `value` longtext,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ctn_options
+-- ----------------------------
+INSERT INTO `ctn_options` VALUES ('1', 'RULES_TEXT', 'Jeder User, der sich für das Spiel registriert, verpflichtet sich, diese Regeln einzuhalten und Regelverstöße anderer zu melden.');
+INSERT INTO `ctn_options` VALUES ('2', 'IMPRINT_NAME', 'Adrian Preuß');
+INSERT INTO `ctn_options` VALUES ('3', 'IMPRINT_ADDRESS', 'Winzerweg 31');
+INSERT INTO `ctn_options` VALUES ('4', 'IMPRINT_CITY', '44263 Dortmund');
+INSERT INTO `ctn_options` VALUES ('5', 'IMPRINT_EMAIL', 'info@crack-the-net.com');
+INSERT INTO `ctn_options` VALUES ('6', 'IMPRINT_TELEPHONE', 'Auf Anfrage');
+INSERT INTO `ctn_options` VALUES ('7', 'THEME_DEFAULT', 'Neo');
+
+-- ----------------------------
 -- Table structure for ctn_rules
 -- ----------------------------
 DROP TABLE IF EXISTS `ctn_rules`;
@@ -198,5 +220,6 @@ CREATE TABLE `ctn_users` (
   `locked_time` datetime NOT NULL,
   `locked_reason` varchar(255) NOT NULL,
   `locked_days` int(3) NOT NULL,
+  `theme` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
