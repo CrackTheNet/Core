@@ -1,0 +1,3 @@
+# Ignore all themes, but not the default "Neo" theme
+themes/
+!Neo/
