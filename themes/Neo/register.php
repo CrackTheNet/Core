@@ -5,7 +5,7 @@
 	
 	$template->getHeader();
 ?>
-	<div class="container  container-table">
+	<div class="container container-table">
 		<div class="row vertical-center-row">
 			<div class="col-sm-6">
 				<div class="panel">
