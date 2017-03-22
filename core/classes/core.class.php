@@ -30,7 +30,7 @@
 		public function getRouter() {
 			return $this->router;
 		}
-		
+				
 		private function load($class) {			
 			if(file_exists(PATH . DS . 'core' . DS . 'config.php')) {
 				require_once(PATH . DS . 'core' . DS . 'config.php');
