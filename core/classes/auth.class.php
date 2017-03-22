@@ -53,6 +53,18 @@
 			
 			return true;
 		}
+		
+		public function getData($name) {
+			$result = Database::single('SELECT * FROM `' . DATABASE_PREFIX . 'users` WHERE `id`=:user_id LIMIT 1', array(
+				'user_id'	=> $this->getID()
+			));
+			
+			if($result == false) {
+				return null;
+			}
+			
+			return $result->{$name};
+		}
 	}
 	
 	class Auth {
@@ -74,6 +86,10 @@
 		
 		public static function getUsername() {
 			return AuthFactory::getInstance()->getUsername();
+		}
+		
+		public static function getData($name) {
+			return AuthFactory::getInstance()->getData($name);
 		}
 	}
 ?>
