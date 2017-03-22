@@ -1,6 +1,9 @@
 <?php
 	namespace CTN;
 	
+	use \CTN\Options;
+	use \CTN\Auth;
+	
 	class Template {
 		private $core;
 		private $theme;
@@ -8,8 +11,13 @@
 		private $assigns = [];
 		
 		public function __construct($core) {
-			$this->core		= $core;
-			$this->theme		= new Theme('Neo');
+			$this->core			= $core;
+			$this->theme		= new Theme(Options::get('THEME_DEFAULT'));
+			
+			if(Auth::isLoggedIn()) {
+				$this->theme	= new Theme(Auth::getData('theme'));			
+			}
+			
 			ob_start('ob_gzhandler');
 		}
 		
@@ -21,6 +29,9 @@
 			foreach($arguments AS $name => $value) {
 				${$name} = $value;
 			}
+			
+			$this->assign('template',		$file);
+			$this->assign('current_page',	$this->core->getRouter()->getPage());
 			
 			if($assignments) {
 				foreach($this->assigns AS $name => $value) {

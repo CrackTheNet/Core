@@ -50,18 +50,42 @@ header {
 	box-shadow: none;
 }
 
-.navbar-transparent ul.nav li a {
+.navbar-transparent.visible {
+	background: rgba(0, 0, 0, 0.7);
+	-webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.navbar-transparent ul.navbar-nav li a {
 	color: rgba(255, 255, 255, 0.7);
 }
 
-.navbar-transparent ul.nav li a:hover {
+.navbar-transparent ul.navbar-nav li a:hover {
 	color: #FFFFFF;
 	background-color: inherit;
 }
 
-.navbar-transparent ul.nav li.active a, .navbar-transparent ul.nav li.active a:focus, .navbar-transparent ul.nav li.active a:hover {
+.navbar-transparent ul.navbar-nav li.active a, .navbar-transparent ul.navbar-nav li.active a:focus, .navbar-transparent ul.navbar-nav li.active a:hover {
 	color: #FFFFFF;
 	background-color: inherit;
+}
+
+body[data-page="/imprint"] .navbar-transparent .navbar-brand img,
+body[data-page="/help"] .navbar-transparent .navbar-brand img,
+body[data-page="/rules"] .navbar-transparent .navbar-brand img,
+body[data-login="true"] .navbar-transparent .navbar-brand img {
+	display: none;
+}
+
+body[data-page="/imprint"] .navbar-transparent.visible .navbar-brand img,
+body[data-page="/help"] .navbar-transparent.visible .navbar-brand img,
+body[data-page="/rules"] .navbar-transparent.visible .navbar-brand img,
+.navbar-transparent.visible .navbar-brand img {
+	height: 100%;
+	display: block;
 }
 
 .container-table {
@@ -212,4 +236,27 @@ ul.square li span {
 
 .bg-box.bg-danger ul.square li span {
 	color: #a94442;
+}
+
+.column {
+	height: 100%;
+	overflow: auto;
+	margin: -100px 0 0 0;
+	padding: 100px 0 0 0;
+}
+
+.content {
+	background: rgba(0, 0, 0, 0.8);
+}
+
+.sidebar.header-visible .logo {
+	display: none;
+}
+
+.sidebar .nav-stacked {
+	margin: 20px 50px 0 50px;
+}
+
+.sidebar.header-visible .nav-stacked {
+	margin: 0 50px 0 50px;
 }

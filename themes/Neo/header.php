@@ -19,7 +19,7 @@
 			$template->includeJS();
 		?>
 	</head>
-	<body>
+	<body data-login="<?php print (Auth::isLoggedIn() ? 'true' : 'false'); ?>" data-page="<?php print $current_page; ?>">
 		<header>
 			<nav class="navbar navbar-default navbar-fixed-top navbar-transparent">
 				<div class="container">
@@ -50,3 +50,37 @@
 				</div>
 			</nav>
 		</header>
+		<?php
+			if(Auth::isLoggedIn() || !in_array($current_page, [ '/', '/login', '/register' ])) {
+				?>
+					<div class="column col-sm-3 sidebar">
+						<a class="logo" href="<?php print $template->getURL('/'); ?>">
+							<img src="<?php print $template->getThemeURL('assets/logo.png'); ?>" alt="" />
+						</a>
+						<?php
+							if(Auth::isLoggedIn()) {
+								?>
+									<ul class="nav nav-pills nav-stacked">
+										<li class="active"><a href="<?php print $template->getURL('/overview'); ?>"><i class="icon-chevron-right"></i> Übersicht</a></li>
+										<li><a href=""><i class="icon-chevron-right"></i> Nachrichten (0)</a></li>
+										<li><a href="#"><i class="icon-chevron-right"></i> Computer</a></li>
+										<li><a href="#"><i class="icon-chevron-right"></i> AngriffsCenter</a></li>
+										<li><a href="#"><i class="icon-chevron-right"></i> Cluster</a></li>
+										<li><a href="#"><i class="icon-chevron-right"></i> Netzwerkumgebung</a></li>
+										<li><a href="#"><i class="icon-chevron-right"></i> Tools</a></li>
+										<li><a href="#"><i class="icon-chevron-right"></i> Rangliste</a></li>
+										<li><a href="#"><i class="icon-chevron-right"></i> Lotterie</a></li>
+										<li><a href="<?php print $template->getURL('/logout'); ?>"><i class="icon-chevron-right"></i> Abmelden</a></li>
+									</ul>
+								<?php
+							}
+						?>
+					</div>
+					<div class="column col-sm-9 content">
+				<?php
+			} else if(!in_array($current_page, [ '/', '/login', '/register' ])) {
+				?>
+					<div class="container">
+				<?php
+			}
+		?>

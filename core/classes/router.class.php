@@ -3,7 +3,8 @@
 	
 	class Router {
 		private $routes		= [];
-		private $redirect		= NULL;
+		private $redirect	= NULL;
+		private $page		= '';
 		private $core;
 		
 		public function __construct($core) {
@@ -11,12 +12,16 @@
 		}
 		
 		public function addRoute($name, $callback) {
-			$route						= new Route();
+			$route					= new Route();
 			$this->routes[$name]	= $route;
 			$route->setPath($name);
 			$route->setCallback($callback);
 			
 			return $route;
+		}
+		
+		public function getPage() {
+			return $this->page;
 		}
 		
 		public function routeExists($name) {
@@ -42,6 +47,7 @@
 			
 			$route		= $this->routes[$name];
 			$callback	= $route->getCallback();
+			$this->page	= $name;
 			$callback();
 		}
 		
