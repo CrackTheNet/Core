@@ -33,7 +33,12 @@
 		
 		public function updateParameter($index, $value) {
 			$keys = array_keys($this->parameters);
-			return $this->parameters[$keys[$index]] = $value;
+			
+			if(isset($keys[$index])) {
+				return $this->parameters[$keys[$index]] = $value;
+			}
+			
+			return null;
 		}
 		
 		public function hasController() {
