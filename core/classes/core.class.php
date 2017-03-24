@@ -62,6 +62,7 @@
 				new Routing('^/activate/([a-zA-Z0-9\-]+)$', 'activate.php', [ 'token' ]),
 				
 				new Routing('/overview', 'user/overview.php'),
+				new Routing('^/computer/([0-9]+)-([a-zA-Z0-9]+)$', 'user/computer.php', [ 'id' ]),
 				new Routing('/computers', 'user/computers.php')
 			] AS $routing) {
 				$this->getRouter()->addRoute($routing->getPath(), function() use ($routing) {
