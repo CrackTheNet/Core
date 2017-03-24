@@ -64,3 +64,5 @@ If you would like to sponsor us, then please [get in touch](mailto:info@crack-th
 [clone-ghmac]: github-mac://openRepo/https://github.com/CrackTheNet/Core
 [get-zip]: https://github.com/CrackTheNet/Core/archive/master.zip
 [get-tgz]: https://github.com/CrackTheNet/Core/archive/master.tar.gz
+
+<img src="https://track.crack-the-net.com/piwik.php?idsite=2&rec=1" style="border:0" alt="" />
