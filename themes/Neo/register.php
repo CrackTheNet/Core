@@ -157,7 +157,7 @@
 												$computer_id	= Database::insert(DATABASE_PREFIX . 'computers', [
 													'id'			=> NULL,
 													'name'			=> '',
-													'ip_address'	=> sprintf('%s.%s', $result->subnet, $network_id),
+													'ip_address'	=> $network_id,
 													'user'			=> $user_id,
 													'credits'		=> CREDITS_START,
 													'points'		=> 0,
