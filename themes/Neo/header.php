@@ -63,7 +63,7 @@
 									<ul class="nav nav-pills nav-stacked">
 										<li class="active"><a href="<?php print $template->getURL('/overview'); ?>"><i class="icon-chevron-right"></i> Übersicht</a></li>
 										<li><a href=""><i class="icon-chevron-right"></i> Nachrichten (0)</a></li>
-										<li><a href="#"><i class="icon-chevron-right"></i> Computer</a></li>
+										<li><a href="<?php print $template->getURL('/computers'); ?>"><i class="icon-chevron-right"></i> Computer</a></li>
 										<li><a href="#"><i class="icon-chevron-right"></i> AngriffsCenter</a></li>
 										<li><a href="#"><i class="icon-chevron-right"></i> Cluster</a></li>
 										<li><a href="#"><i class="icon-chevron-right"></i> Netzwerkumgebung</a></li>

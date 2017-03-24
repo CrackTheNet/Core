@@ -59,8 +59,10 @@
 				new Routing('/rules', 'rules.php'),
 				new Routing('/imprint', 'imprint.php'),
 				new Routing('/logout', 'logout.php'),
+				new Routing('^/activate/([a-zA-Z0-9\-]+)$', 'activate.php', [ 'token' ]),
+				
 				new Routing('/overview', 'user/overview.php'),
-				new Routing('^/activate/([a-zA-Z0-9\-]+)$', 'activate.php', [ 'token' ])
+				new Routing('/computers', 'user/computers.php')
 			] AS $routing) {
 				$this->getRouter()->addRoute($routing->getPath(), function() use ($routing) {
 					$arguments = func_get_args();

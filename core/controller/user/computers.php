@@ -6,5 +6,5 @@
 		Response::redirect('/login');
 	}
 	
-	$scope->getTemplate()->display('user/overview');
+	$scope->getTemplate()->display('user/computers');
 ?>
