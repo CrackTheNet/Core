@@ -150,7 +150,8 @@
 													'email'				=> $email,
 													'verified_state'	=> 'UNVERIFIED',
 													'verified_token'	=> $token,
-													'locked_state'		=> 'UNLOCKED'
+													'locked_state'		=> 'UNLOCKED',
+													'time_registred'	=> date('Y-m-d H:i:s')
 												]);
 												
 												
