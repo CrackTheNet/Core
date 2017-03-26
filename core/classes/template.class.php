@@ -3,6 +3,7 @@
 	
 	use \CTN\Options;
 	use \CTN\Auth;
+	use \CTN\Messages;
 	
 	class Template {
 		private $core;
@@ -32,6 +33,7 @@
 			
 			$this->assign('template',		$file);
 			$this->assign('current_page',	$this->core->getRouter()->getPage());
+			$this->assign('messages',		new Messages());
 			
 			if($assignments) {
 				foreach($this->assigns AS $name => $value) {
@@ -69,7 +71,7 @@
 		}
 		
 		public function getTitle() {
-			return 'Title';
+			return 'CrackTheNet | Browsergame | Let\'s hack the World!';
 		}
 		
 		public function getCharset() {
@@ -92,19 +94,79 @@
 			return $this->getThemeURL($file);;
 		}
 		
-		public function includeCSS($files = []) {
+		private $css_async = false;
+		
+		public function includeCSS($files = [], $async = false, $compare = false) {
+			$checksums			= [];
+			$cache				= '';
+			$this->css_async	= $async;
+			
 			foreach($files AS $file) {
-				printf('<link rel="stylesheet" type="text/css" href="%s" />', $this->prepareFile($file));
+				if($compare && file_exists(PATH . DS . 'temp/cache.js') && (filemtime(PATH . DS . 'temp/cache.js') > (time() - 60 * 5))) {
+					$content		= file_get_contents($this->prepareFile($file));
+					$checksum		= md5($content);
+					$checksums[]	 = $checksum;
+					
+					$cache		.= '/* ' . $checksum . ' */';
+					$cache		.= $content;
+				} else {
+					printf('<link rel="stylesheet" type="text/css" href="%s" />', $this->prepareFile($file));
+				}
+			}
+			
+			if($compare && file_exists(PATH . DS . 'temp/cache.js') && (filemtime(PATH . DS . 'temp/cache.js') > (time() - 60 * 5))) {
+				file_put_contents(PATH . DS . 'temp/cache.css', $cache);
+			}
+			
+			if($compare) {
+				printf('<link rel="stylesheet" type="text/css" href="%s" />', $this->getURL('/cache.css'));
 			}
 		}
 		
-		public function includeJS($files = [], $footer = false) {
+		public function includeJS($files = [], $footer = false, $async = false, $compare = false) {
+			if(!$footer) {
+				return;
+			}
+			
+			if($this->css_async) {
+				printf('<script type="text/javascript">try{includeCSS(\'%s\');}catch(e){}</script>', $this->getURL('/cache.css'));
+			}
+			
+			$checksums	= [];
+			$cache		= '';
+			
+			/* CSS Async*/
+			$cache		.= '!function(e){"use strict";var n=function(n,t,o){function i(e){return f.body?e():void setTimeout(function(){i(e)})}var d,r,a,l,f=e.document,s=f.createElement("link"),u=o||"all";return t?d=t:(r=(f.body||f.getElementsByTagName("head")[0]).childNodes,d=r[r.length-1]),a=f.styleSheets,s.rel="stylesheet",s.href=n,s.media="only x",i(function(){d.parentNode.insertBefore(s,t?d:d.nextSibling)}),l=function(e){for(var n=s.href,t=a.length;t--;)if(a[t].href===n)return e();setTimeout(function(){l(e)})},s.addEventListener&&s.addEventListener("load",function(){this.media=u}),s.onloadcssdefined=l,l(function(){s.media!==u&&(s.media=u)}),s};"undefined"!=typeof exports?exports.includeCSS=n:e.includeCSS=n}("undefined"!=typeof global?global:this);';
+			
 			foreach($files AS $file) {
-				printf('<script type="text/javascript" src="%s"></script>', $this->prepareFile($file));
+				if($compare && file_exists(PATH . DS . 'temp/cache.js') && (filemtime(PATH . DS . 'temp/cache.js') > (time() - 60 * 5))) {
+					$content		= file_get_contents($this->prepareFile($file));
+					$checksum		= md5($content);
+					$checksums[]	 = $checksum;
+					
+					$cache		.= '/* ' . $checksum . ' */';
+					$cache		.= 'try{';
+					$cache		.= $content;
+					$cache		.= '}catch(e){}';
+				} else {
+					printf('<script ' . ($async ? 'async ' : '') . 'type="text/javascript" src="%s"></script>', $this->prepareFile($file));
+				}
+			}
+			
+			if($compare && file_exists(PATH . DS . 'temp/cache.js') && (filemtime(PATH . DS . 'temp/cache.js') > (time() - 60 * 5))) {
+				file_put_contents(PATH . DS . 'temp/cache.js', $cache);
+			}
+			
+			if($compare) {
+				printf('<script ' . ($async ? 'async ' : '') . 'type="text/javascript" src="%s"></script>', $this->getURL('/cache.js'));
 			}
 			
 			if($footer) {
-				?><script type="text/javascript">var _paq = _paq || [];_paq.push(["setDocumentTitle",document.domain + "/" + document.title]);_paq.push(["setCookieDomain", "*.*"]);_paq.push(['trackPageView']);_paq.push(['enableLinkTracking']);(function(){var u="//track.crack-the-net.com/";_paq.push(['setTrackerUrl',u+'piwik.php']);_paq.push(['setSiteId','2']);var d=document,g=d.createElement('script'),s=d.getElementsByTagName('script')[0];g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);})();</script><noscript><p><img src="//track.crack-the-net.com/piwik.php?idsite=2&rec=1" style="border:0;" alt="" /></p></noscript><?php
+				?>
+				<script type="text/javascript">
+					var _paq = _paq || [];_paq.push(['trackPageView']);_paq.push(['enableLinkTracking']);(function() {var u="//track.crack-the-net.com/";_paq.push(['setTrackerUrl', u+'piwik.php']);_paq.push(['setSiteId', '1']);var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);})();
+				</script>
+				<?php
 			}
 		}
 		
