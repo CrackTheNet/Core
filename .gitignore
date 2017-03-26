@@ -4,3 +4,6 @@ themes/
 
 # Ignore temporary SVG files (only for local development)
 core/default/assets/map_*
+
+# Ignore local GitHub Data
+.github
