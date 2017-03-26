@@ -84,7 +84,7 @@
 				$this->executeRoute($route);
 			} else {
 				if(empty($this->redirect)) {
-					print "404";
+					$this->core->getTemplate()->display('404');
 				} else {
 					Response::redirect($this->redirect);
 				}
