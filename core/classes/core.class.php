@@ -52,6 +52,7 @@
 		
 		private function init() {
 			foreach([
+				# Global Site
 				new Routing('/', 'home.php'),
 				new Routing('/login', 'login.php'),
 				new Routing('/register', 'register.php'),
@@ -61,9 +62,20 @@
 				new Routing('/logout', 'logout.php'),
 				new Routing('^/activate/([a-zA-Z0-9\-]+)$', 'activate.php', [ 'token' ]),
 				
+				# User Site
 				new Routing('/overview', 'user/overview.php'),
+				
+				# Computers
 				new Routing('^/computer/([0-9]+)-([a-zA-Z0-9]+)$', 'user/computer.php', [ 'id' ]),
-				new Routing('/computers', 'user/computers.php')
+				new Routing('/computers', 'user/computers.php'),
+				
+				# Message System
+				new Routing('/messages', 'user/messages.php'),
+				new Routing('^/messages/(inbox|outbox)$', 'user/messages.php', [ 'type' ]),
+				new Routing('^/message/([0-9]+)$', 'user/message.php', [ 'id' ]),
+				
+				# Informations
+				new Routing('/system/commits', 'system/commits.php')
 			] AS $routing) {
 				$this->getRouter()->addRoute($routing->getPath(), function() use ($routing) {
 					$arguments = func_get_args();
