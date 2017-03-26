@@ -1,3 +1,6 @@
 # Ignore all themes, but not the default "Neo" theme
 themes/
 !Neo/
+
+# Ignore temporary SVG files (only for local development)
+core/default/assets/map_*
