@@ -1,5 +1,5 @@
 /*
-	Date: 2017-03-22 08:59:25
+	Date: 2017-03-26 11:57:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -13,7 +13,7 @@ CREATE TABLE `ctn_badwords` (
   `value` varchar(255) NOT NULL,
   `type` enum('BAD_USER','BAD_WORD') NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ctn_badwords
@@ -37,6 +37,10 @@ INSERT INTO `ctn_badwords` VALUES ('16', 'nutte', 'BAD_WORD');
 INSERT INTO `ctn_badwords` VALUES ('17', 'fotze', 'BAD_WORD');
 INSERT INTO `ctn_badwords` VALUES ('18', 'bitch', 'BAD_WORD');
 INSERT INTO `ctn_badwords` VALUES ('19', 'schlampe', 'BAD_WORD');
+INSERT INTO `ctn_badwords` VALUES ('20', 'system', 'BAD_USER');
+INSERT INTO `ctn_badwords` VALUES ('21', 'sys', 'BAD_USER');
+INSERT INTO `ctn_badwords` VALUES ('22', 'root', 'BAD_USER');
+INSERT INTO `ctn_badwords` VALUES ('23', 'administrator', 'BAD_USER');
 
 -- ----------------------------
 -- Table structure for ctn_computers
@@ -55,7 +59,7 @@ CREATE TABLE `ctn_computers` (
   KEY `country` (`country`),
   CONSTRAINT `country` FOREIGN KEY (`country`) REFERENCES `ctn_countries` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `user` FOREIGN KEY (`user`) REFERENCES `ctn_users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for ctn_continents
@@ -153,6 +157,25 @@ INSERT INTO `ctn_countries` VALUES ('49', '3', 'atlantis', 'Atlantis', '235', nu
 INSERT INTO `ctn_countries` VALUES ('50', '3', 'myth', 'Myth', '222', null, null);
 
 -- ----------------------------
+-- Table structure for ctn_messages
+-- ----------------------------
+DROP TABLE IF EXISTS `ctn_messages`;
+CREATE TABLE `ctn_messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sender` int(11) DEFAULT NULL,
+  `receiver` int(11) DEFAULT NULL,
+  `time_send` datetime DEFAULT NULL,
+  `time_read` datetime DEFAULT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `message` longtext,
+  PRIMARY KEY (`id`),
+  KEY `sender` (`sender`),
+  KEY `receiver` (`receiver`),
+  CONSTRAINT `receiver` FOREIGN KEY (`receiver`) REFERENCES `ctn_users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `sender` FOREIGN KEY (`sender`) REFERENCES `ctn_users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
 -- Table structure for ctn_options
 -- ----------------------------
 DROP TABLE IF EXISTS `ctn_options`;
@@ -221,5 +244,13 @@ CREATE TABLE `ctn_users` (
   `locked_reason` varchar(255) NOT NULL,
   `locked_days` int(3) NOT NULL,
   `theme` varchar(255) DEFAULT NULL,
+  `time_registred` datetime DEFAULT NULL,
+  `time_activity` datetime DEFAULT NULL,
+  `security_logout` enum('Y','N') DEFAULT 'Y',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ctn_users
+-- ----------------------------
+INSERT INTO `ctn_users` VALUES ('0', 'System', '', '', 'VERIFIED', '', 'UNLOCKED', '0', '0000-00-00 00:00:00', '', '0', null, null, null, 'Y');
