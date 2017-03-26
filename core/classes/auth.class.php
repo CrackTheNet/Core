@@ -14,9 +14,19 @@
 		}
 		
 		public function isLoggedIn() {
-			$user_id = Session::get('user_id');
+			$user_id	= Session::get('user_id');
+			$login		= (!empty($user_id) && $user_id > 0);
 			
-			return (!empty($user_id) && $user_id > 0);
+			// Update activity
+			if($login) {
+				Database::update(DATABASE_PREFIX . 'users', 'id', [
+					'id'				=> $user_id,
+					'time_activity'		=> date('Y-m-d H:i:s'),
+					'security_logout'	=> 'N'
+				]);
+			}
+		
+			return $login;
 		}
 		
 		public function getID() {
@@ -28,8 +38,18 @@
 		}
 		
 		public function logout() {
+			Database::update(DATABASE_PREFIX . 'users', 'id', [
+				'id'				=> $this->getID(),
+				'time_activity'		=> date('Y-m-d H:i:s'),
+				'security_logout'	=> 'Y'
+			]);
+			
 			Session::remove('user_id');
 			Session::remove('user_name');
+		}
+		
+		public function hadLoggedOut() {
+			return Session::get('security_logout');
 		}
 		
 		public function login($username, $password) {
@@ -44,8 +64,9 @@
 			}
 			
 			if($result->id > 0) {
-				Session::set('user_name',	$result->username);
-				Session::set('user_id',		$result->id);
+				Session::set('user_name',		$result->username);
+				Session::set('user_id',			$result->id);
+				Session::set('security_logout', $result->security_logout);
 			} else {
 				throw new \Exception('Unknown User');
 				return false;				
@@ -86,6 +107,10 @@
 		
 		public static function getUsername() {
 			return AuthFactory::getInstance()->getUsername();
+		}
+		
+		public static function hadLoggedOut() {
+			return AuthFactory::getInstance()->hadLoggedOut();
 		}
 		
 		public static function getData($name) {
