@@ -6,4 +6,7 @@ themes/
 core/default/assets/map_*
 
 # Ignore local GitHub Data
-.github
+.github/
+
+# Ignore Temporary files
+temp/
