@@ -10,10 +10,6 @@
 		private $template;
 		
 		public function __construct() {
-			if(!isset($_SESSION)) {
-				session_start();
-			}
-			
 			// Autoloading
 			spl_autoload_register([ $this, 'load' ]);
 			

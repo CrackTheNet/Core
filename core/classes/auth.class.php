@@ -46,10 +46,12 @@
 			
 			Session::remove('user_id');
 			Session::remove('user_name');
+			Session::remove('security_logout');
 		}
 		
 		public function hadLoggedOut() {
-			return Session::get('security_logout');
+			$security_logout = Session::get('security_logout');
+			return $security_logout === 'Y' || $security_logout === NULL;
 		}
 		
 		public function login($username, $password) {
