@@ -9,6 +9,9 @@
 
 Grab the source and join in the fun!
 
+## Support me!
+[![Support with Donation](https://pledgie.com/campaigns/33863.png?skin_name=chrome)](https://pledgie.com/campaigns/33863) 
+
 ## Contents
 
 - [Download](#download)
