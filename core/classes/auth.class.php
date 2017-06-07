@@ -77,6 +77,10 @@
 			return true;
 		}
 		
+		public function isAdmin() {
+			return $this->getData('status') == 'Admin';
+		}
+		
 		public function getData($name) {
 			$result = Database::single('SELECT * FROM `' . DATABASE_PREFIX . 'users` WHERE `id`=:user_id LIMIT 1', array(
 				'user_id'	=> $this->getID()
@@ -117,6 +121,10 @@
 		
 		public static function getData($name) {
 			return AuthFactory::getInstance()->getData($name);
+		}
+		
+		public static function isAdmin() {
+			return AuthFactory::getInstance()->isAdmin();
 		}
 	}
 ?>

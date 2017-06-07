@@ -71,7 +71,14 @@
 				new Routing('^/message/([0-9]+)$', 'user/message.php', [ 'id' ]),
 				
 				# Informations
-				new Routing('/system/commits', 'system/commits.php')
+				new Routing('/system/commits', 'system/commits.php'),
+				
+				# Admin Interface
+				new Routing('/admin/overview', 'admin/overview.php'),
+				new Routing('/admin/users', 'admin/users.php'),
+				new Routing('/admin/themes', 'admin/themes.php'),
+				new Routing('/admin/plugins', 'admin/plugins.php'),
+				new Routing('/admin/system', 'admin/system.php')
 			] AS $routing) {
 				$this->getRouter()->addRoute($routing->getPath(), function() use ($routing) {
 					$arguments = func_get_args();

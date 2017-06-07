@@ -62,6 +62,16 @@
 			$this->getTemplate('footer', [], true, true);
 		}
 		
+		public function getAdminHeader() {
+			$this->getTemplate('admin/header', [
+				'username'	=> Auth::getUsername()
+			], true, true);
+		}
+		
+		public function getAdminFooter() {
+			$this->getTemplate('admin/footer', [], true, true);
+		}
+		
 		public function getThemeURL($file) {
 			return sprintf('%s://%s/%s/%s', ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 'https' : 'http'), $_SERVER['HTTP_HOST'], $this->theme->getURI(), $file);
 		}
@@ -87,11 +97,15 @@
 		}
 		
 		private function prepareFile($file) {
+			if(substr($file, 0, 2) == '::') {
+				return $this->getURL('/' . substr($file, 2));
+			}
+			
 			if(preg_match('/^(http|https):\/\//Uis', $file)) {
 				return $file;
 			}
 			
-			return $this->getThemeURL($file);;
+			return $this->getThemeURL($file);
 		}
 		
 		private $css_async = false;
