@@ -93,35 +93,35 @@
 	}
 	
 	class Database {
-		public function query($query, $parameters = array()) {
+		public static function query($query, $parameters = array()) {
 			return DatabaseFactory::getInstance()->query($query, $parameters);
 		}
 		
-		public function single($query, $parameters = array()) {
+		public static function single($query, $parameters = array()) {
 			return DatabaseFactory::getInstance()->single($query, $parameters);
 		}
 		
-		public function count($query, $parameters = array()) {
+		public static function count($query, $parameters = array()) {
 			return DatabaseFactory::getInstance()->count($query, $parameters);
 		}
 		
-		public function fetch($query, $parameters = array()) {
+		public static function fetch($query, $parameters = array()) {
 			return DatabaseFactory::getInstance()->fetch($query, $parameters);
 		}
 		
-		public function update($table, $where, $parameters = array()) {
+		public static function update($table, $where, $parameters = array()) {
 			return DatabaseFactory::getInstance()->update($table, $where, $parameters);
 		}
 		
-		public function insert($table, $parameters = array()) {
+		public static function insert($table, $parameters = array()) {
 			return DatabaseFactory::getInstance()->insert($table, $parameters);
 		}
 		
-		public function delete($table, $parameters = array()) {
+		public static function delete($table, $parameters = array()) {
 			return DatabaseFactory::getInstance()->delete($table, $parameters);
 		}
 		
-		public function deleteWhereNot($table, $delete_not = array(), $parameters = array()) {
+		public static function deleteWhereNot($table, $delete_not = array(), $parameters = array()) {
 			return DatabaseFactory::getInstance()->deleteWhereNot($table, $delete_not, $parameters);
 		}
 	}
